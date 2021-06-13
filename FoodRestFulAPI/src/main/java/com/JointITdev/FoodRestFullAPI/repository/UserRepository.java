@@ -9,6 +9,6 @@ import com.JointITdev.FoodRestFullAPI.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
-	@Query(value="SELECT * FROM user WHERE username=:username",nativeQuery = true)
+	@Query(value="SELECT * FROM u_user WHERE username=:username",nativeQuery = true)
 	User findUsername(@Param("username")String username);
 }
