@@ -39,20 +39,17 @@ public class UserServiceImpl implements UserService {
 		
 		User addUser = new User();
 		try {
-			if (!user.getUsername().isBlank() || !user.getName().isBlank() || !user.getPassword().isBlank()
-					|| !user.getChooseType().isBlank()) {
-				User validateUser=userRepo.findUsername(user.getUsername());
-				if(validateUser!=null) {
-					throw new UsernameExistException("User is already exist");
-				}else {
-					addUser.setName(user.getName());
-					addUser.setUsername(user.getUsername());
-					addUser.setPassword(user.getPassword());
-					addUser.setChooseType(user.getChooseType());
-					userRepo.save(addUser);
-				}
-				return addUser;
+			User validateUser=userRepo.findUsername(user.getUsername());
+			if(validateUser!=null) {
+				throw new UsernameExistException("User is already exist");
+			}else {
+				addUser.setName(user.getName());
+				addUser.setUsername(user.getUsername());
+				addUser.setPassword(user.getPassword());
+				addUser.setChooseType(user.getChooseType());
+				userRepo.save(addUser);
 			}
+			return addUser;
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}
